@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Jim+Nightshade" rel="stylesheet">
+    <title>Lorenzo Sonego</title>
+</head>
+
+
+<div class="img1">
+    <h1>Lorenzo Sonego
+        <hr>
+        <span class="smaller">
+            nuovo sito in arrivo</span>
+    </h1>
+
+    <!-- <br>
+    <button id="button">Click the button, brxo:</button>
+    <br>
+    <br>
+    <div id="users"></div> -->
+</div>
+
+<body>
+    <!--<script src="javascript/index.js"></script>-->
+</body>
+
+<script>
+    document.getElementById('button').addEventListener('click', loadUsers);
+    function loadUsers() {
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://api.sportradar.com/tennis-t2/en/players/sr:competitor:104847/profile.json?api_key=zht9nbryw9xycjktgs8jh7c3', true);
+
+        xhr.onload = function () {
+            if (this.status == 200) {
+                var users = JSON.parse(this.responseText);
+                var output = '';
+                for (var i in users) {
+                    if (i == 'player') {
+                        console.log(i);
+                        output +=
+                            '<div class="user">' +
+                            '<ul>' +
+                            '<li><b>name</b>: ' + users[i].name + '</li>' +
+                            '<li><b>gender</b>: ' + users[i].gender + '</li>' +
+                            '</ul>' +
+                            '</div>';
+                    }
+                }
+                document.getElementById('users').innerHTML = output;
+            }
+        }
+        xhr.send();
+    }
+
+</script>
+
+</body>
+
+</html>
